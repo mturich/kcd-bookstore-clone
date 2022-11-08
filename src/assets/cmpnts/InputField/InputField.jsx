@@ -1,12 +1,10 @@
-function InputField(props) {
-	const [type, labelname, ...rest] = props
-	labelname ?? 'Input'
+function InputField({ type = 'input', labelname = 'Input' }) {
    return (
       <>
-			 <label htmlFor={labelname}>{Input}</label>
-			 <input id={labelname} type={type} {...rest} />
+         <label htmlFor={labelname}>{labelname}</label>
+         <input style={{ margin: '1rem' }} id={labelname} type={type} />
       </>
    )
 }
 
-export default inputField
+export default InputField

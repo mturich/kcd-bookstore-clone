@@ -1,7 +1,7 @@
 //import React from 'react'
 import { useEffect, useState } from 'react'
 import './App.css'
-
+import InputField from './assets/cmpnts/InputField/InputField'
 import Button from './assets/cmpnts/Button/Button'
 
 function LoginPage() {
@@ -14,7 +14,6 @@ function LoginPage() {
    })
 
    const handleOnClick = event => {
-     
       let buttonText = event.target.textContent
       if (buttonText === LOGIN_BTN) setRegisterField(false)
       else if (buttonText === REGISTER_BTN) setRegisterField(true)
@@ -24,22 +23,29 @@ function LoginPage() {
                .textContent}`
          )
    }
-   const handleSubmit = (event) => { 
+   const handleSubmit = event => {
       event.preventDefault()
       console.dir(event.target.elements)
    }
 
    return (
       <>
-         <div>
-            <h1 style={{ color: 'white' }}>Book store</h1>
-            <Button onClick={handleOnClick}>
-               {LOGIN_BTN}
-            </Button>
-            <Button onClick={handleOnClick}>{REGISTER_BTN}</Button>
+         <h1 style={{ color: 'white' }}>Book store</h1>
+         <div style={{ margin: '1rem', display: 'flex' }}>
+            <form onSubmit={handleSubmit}>
+               {registerField ? (
+                  <>
+                     <InputField type={'text'} labelname={'First Name'} />
+                     <InputField type={'text'} labelname={'Last Name'} />
+                  </>
+               ) : null}
+               <InputField type={'email'} labelname={'Email'} />
+               <InputField type={'password'} labelname={'Password'} />
+               <Button onClick={handleOnClick}>{LOGIN_BTN}</Button>
+            </form>
          </div>
          <div>
-            <form onSubmit={handleSubmit}></form>
+            <Button onClick={handleOnClick}>{REGISTER_BTN}</Button>
          </div>
       </>
    )
