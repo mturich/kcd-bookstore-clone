@@ -1,17 +1,22 @@
 import { useState, useRef } from 'react'
-import reactLogo from './assets/react.svg'
+import { v4 as uuidv4 } from 'uuid'
 import './App.css'
 
 function App() {
-   const [bookCount, setBookCount] = useState(0)
    const [bookStore, setBookStore] = useState(['tefdasst'])
    const input = useRef('')
 
    const handleSubmit = event => {
       event.preventDefault()
-      //console.log('clicked')
-      const newBookStore = [...bookStore, input.current.value]
-      setBookStore(prev => newBookStore)
+      console.log('clicked')
+      // let inputBook = event.target.elements[0].value
+      // let inputBook = event.target.elements[0].value
+      console.dir(event.target)
+      console.dir(event.target.elements.bookName.value)
+      setBookStore(prevState => [
+         ...prevState,
+         event.target.elements.bookName.value,
+      ])
    }
 
    return (
@@ -32,17 +37,15 @@ function App() {
             <button type='submit'>Add to list</button>
          </form>
 
-         <ul>
-            {bookStore.length !== 0 ? (
-               <ul>
-                  {bookStore.map(book => (
-                     <li key={book}>{book}</li>
-                  ))}
-               </ul>
-            ) : (
-               <div>There is currently no book in store!</div>
-            )}
-         </ul>
+         {bookStore.length !== 0 ? (
+            <ul>
+               {bookStore.map(book => (
+                  <li key={uuidv4()}>{book}</li>
+               ))}
+            </ul>
+         ) : (
+            <div>There is currently no book in store!</div>
+         )}
       </div>
    )
 }
