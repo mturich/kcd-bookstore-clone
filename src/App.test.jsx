@@ -10,10 +10,12 @@ import userEvent from '@testing-library/user-event'
 
 import App from './App'
 
-describe('check if page renders',  () => {
+describe('check if page renders', () => {
    it('should display the heading', async () => {
       render(<App />)
-      screen.debug()
-      expect(screen.getByText(/book list/i))
+      //screen.debug()
+      expect(
+         screen.getByRole('heading', { name: /book list/i })
+      ).toBeInTheDocument()
    })
 })
